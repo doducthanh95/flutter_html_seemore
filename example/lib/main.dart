@@ -39,8 +39,8 @@ const htmlData = r"""
       <h3>Support for maxLines:</h3>
       <h5>Lorem ipsum dolor sit amet, consectetur adipiscing
        elit. Donec vestibulum sapien feugiat lorem tempor, id porta
-        orci elementum. Fusce sed justo id arcu egestas congue.
-         Fusce tincidunt lacus ipsum, in imperdiet felis ultricies eu.
+       orci elementum. Fusce sed justo id arcu egestas congue.
+       Fusce tincidunt lacus ipsum, in imperdiet felis ultricies eu.
           In ullamcorper risus felis, ac maximus dui bibendum vel.
            Integer ligula tortor, facilisis eu mauris ut, ultrices hendrerit
             ex. Donec scelerisque massa consequat, eleifend mauris eu, mollis
@@ -243,7 +243,6 @@ const htmlData = r"""
       <h3>Tex Support with the custom tex tag:</h3>
       <tex>i\hbar\frac{\partial}{\partial t}\Psi(\vec x,t) = -\frac{\hbar}{2m}\nabla^2\Psi(\vec x,t)+ V(\vec x)\Psi(\vec x,t)</tex>
       <p id='bottom'><a href='#top'>Scroll to top</a></p>
-      <seeless></seeless>
 """;
 
 class _MyHomePageState extends State<MyHomePage> {

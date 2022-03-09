@@ -94,61 +94,32 @@ class HtmlParser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, Map<String, List<css.Expression>>> declarations =
-        _getExternalCssDeclarations(
-            htmlData.getElementsByTagName("style"), onCssParseError);
-    StyledElement lexedTree = lexDomTree(
-      htmlData,
-      customRender.keys.toList(),
-      tagsList,
-      navigationDelegateForIframe,
-      context,
-    );
-    StyledElement? externalCssStyledTree;
-    if (declarations.isNotEmpty) {
-      externalCssStyledTree = _applyExternalCss(declarations, lexedTree);
+    StyledElement cleanedTree = _formartHtmlDisplay(context, htmlData);
+    var _ = _findSubStringInsert(cleanedTree: cleanedTree);
+    var htmlString = htmlData.outerHtml;
+    if (countNumber > numberShortCharacterDisplay) {
+      //add tag seeless
+      htmlString = htmlString.replaceAll(
+          '</body></html>', '<seeless></seeless></body></html>');
     }
-    StyledElement inlineStyledTree =
-        _applyInlineStyles(externalCssStyledTree ?? lexedTree, onCssParseError);
-    StyledElement customStyledTree =
-        _applyCustomStyles(style, inlineStyledTree);
-    StyledElement cascadedStyledTree = _cascadeStyles(style, customStyledTree);
-    StyledElement cleanedTree = cleanTree(cascadedStyledTree);
 
     if (!isShowFull) {
       //handle format html
-      var _ = findSubStringInsert(cleanedTree: cleanedTree);
-
       if (countNumber > numberShortCharacterDisplay) {
         //insert tag SeeMore
-        var htmlString = htmlData.outerHtml;
         var temps = htmlString.split(subStringEnd);
-        var newHtml = dom.Document.html(
-            temps.first + "<seemore></seemore></$tagEnd></body></html>");
-
-        Map<String, Map<String, List<css.Expression>>> declarations1 =
-            _getExternalCssDeclarations(
-                newHtml.getElementsByTagName("style"), onCssParseError);
-        StyledElement lexedTree1 = lexDomTree(
-          newHtml,
-          customRender.keys.toList(),
-          tagsList,
-          navigationDelegateForIframe,
-          context,
-        );
-        StyledElement? externalCssStyledTree1;
-        if (declarations1.isNotEmpty) {
-          externalCssStyledTree1 = _applyExternalCss(declarations1, lexedTree1);
+        // var stringHtml = '';
+        if (subStringStart.isEmpty) {
+          htmlString =
+              temps.first + subStringEnd + "<seemore></seemore></body></html>";
+        } else {
+          htmlString =
+              temps.first + "<seemore></seemore></$tagEnd></body></html>";
         }
-        StyledElement inlineStyledTree1 = _applyInlineStyles(
-            externalCssStyledTree1 ?? lexedTree1, onCssParseError);
-        StyledElement customStyledTree1 =
-            _applyCustomStyles(style, inlineStyledTree1);
-        StyledElement cascadedStyledTree1 =
-            _cascadeStyles(style, customStyledTree1);
-        cleanedTree = cleanTree(cascadedStyledTree1);
       }
     }
+    var newHtml = dom.Document.html(htmlString);
+    cleanedTree = _formartHtmlDisplay(context, newHtml);
 
     InlineSpan parsedTree = parseTree(
       RenderContext(
@@ -1146,7 +1117,7 @@ class HtmlParser extends StatelessWidget {
     return tree;
   }
 
-  bool findSubStringInsert({StyledElement? cleanedTree}) {
+  bool _findSubStringInsert({StyledElement? cleanedTree}) {
     if (countNumber > numberShortCharacterDisplay) {
       return false;
     }
@@ -1171,15 +1142,45 @@ class HtmlParser extends StatelessWidget {
       } else {
         if (listTagIgnor.contains(tag)) {
           countNumber++;
+          subStringStart = '';
+          subStringEnd = cleanedTree?.element?.outerHtml ?? '';
+          tagEnd = cleanedTree?.element?.localName ?? '';
+          countNumber = numberShortCharacterDisplay + 100;
+          return true;
         } else {
           countNumber += content.length;
         }
       }
     }
     cleanedTree?.children.forEach((element) {
-      findSubStringInsert(cleanedTree: element);
+      _findSubStringInsert(cleanedTree: element);
     });
     return false;
+  }
+
+  StyledElement _formartHtmlDisplay(
+      BuildContext context, dom.Document htmlData) {
+    Map<String, Map<String, List<css.Expression>>> declarations =
+        _getExternalCssDeclarations(
+            htmlData.getElementsByTagName("style"), onCssParseError);
+    StyledElement lexedTree = lexDomTree(
+      htmlData,
+      customRender.keys.toList(),
+      tagsList,
+      navigationDelegateForIframe,
+      context,
+    );
+    StyledElement? externalCssStyledTree;
+    if (declarations.isNotEmpty) {
+      externalCssStyledTree = _applyExternalCss(declarations, lexedTree);
+    }
+    StyledElement inlineStyledTree =
+        _applyInlineStyles(externalCssStyledTree ?? lexedTree, onCssParseError);
+    StyledElement customStyledTree =
+        _applyCustomStyles(style, inlineStyledTree);
+    StyledElement cascadedStyledTree = _cascadeStyles(style, customStyledTree);
+    StyledElement cleanedTree = cleanTree(cascadedStyledTree);
+    return cleanedTree;
   }
 }
 
