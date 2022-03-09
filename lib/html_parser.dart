@@ -115,37 +115,39 @@ class HtmlParser extends StatelessWidget {
     StyledElement cascadedStyledTree = _cascadeStyles(style, customStyledTree);
     StyledElement cleanedTree = cleanTree(cascadedStyledTree);
 
-    if (!isShowFull && (countNumber > numberShortCharacterDisplay)) {
+    if (!isShowFull) {
       //handle format html
       var _ = findSubStringInsert(cleanedTree: cleanedTree);
 
-      //insert tag SeeMore
-      var htmlString = htmlData.outerHtml;
-      var temps = htmlString.split(subStringEnd);
-      var newHtml = dom.Document.html(
-          temps.first + "<seemore></seemore></$tagEnd></body></html>");
+      if (countNumber > numberShortCharacterDisplay) {
+        //insert tag SeeMore
+        var htmlString = htmlData.outerHtml;
+        var temps = htmlString.split(subStringEnd);
+        var newHtml = dom.Document.html(
+            temps.first + "<seemore></seemore></$tagEnd></body></html>");
 
-      Map<String, Map<String, List<css.Expression>>> declarations1 =
-          _getExternalCssDeclarations(
-              newHtml.getElementsByTagName("style"), onCssParseError);
-      StyledElement lexedTree1 = lexDomTree(
-        newHtml,
-        customRender.keys.toList(),
-        tagsList,
-        navigationDelegateForIframe,
-        context,
-      );
-      StyledElement? externalCssStyledTree1;
-      if (declarations1.isNotEmpty) {
-        externalCssStyledTree1 = _applyExternalCss(declarations1, lexedTree1);
+        Map<String, Map<String, List<css.Expression>>> declarations1 =
+            _getExternalCssDeclarations(
+                newHtml.getElementsByTagName("style"), onCssParseError);
+        StyledElement lexedTree1 = lexDomTree(
+          newHtml,
+          customRender.keys.toList(),
+          tagsList,
+          navigationDelegateForIframe,
+          context,
+        );
+        StyledElement? externalCssStyledTree1;
+        if (declarations1.isNotEmpty) {
+          externalCssStyledTree1 = _applyExternalCss(declarations1, lexedTree1);
+        }
+        StyledElement inlineStyledTree1 = _applyInlineStyles(
+            externalCssStyledTree1 ?? lexedTree1, onCssParseError);
+        StyledElement customStyledTree1 =
+            _applyCustomStyles(style, inlineStyledTree1);
+        StyledElement cascadedStyledTree1 =
+            _cascadeStyles(style, customStyledTree1);
+        cleanedTree = cleanTree(cascadedStyledTree1);
       }
-      StyledElement inlineStyledTree1 = _applyInlineStyles(
-          externalCssStyledTree1 ?? lexedTree1, onCssParseError);
-      StyledElement customStyledTree1 =
-          _applyCustomStyles(style, inlineStyledTree1);
-      StyledElement cascadedStyledTree1 =
-          _cascadeStyles(style, customStyledTree1);
-      cleanedTree = cleanTree(cascadedStyledTree1);
     }
 
     InlineSpan parsedTree = parseTree(
