@@ -115,7 +115,7 @@ class HtmlParser extends StatelessWidget {
     StyledElement cascadedStyledTree = _cascadeStyles(style, customStyledTree);
     StyledElement cleanedTree = cleanTree(cascadedStyledTree);
 
-    if (!isShowFull) {
+    if (!isShowFull && (countNumber > numberShortCharacterDisplay)) {
       //handle format html
       var _ = findSubStringInsert(cleanedTree: cleanedTree);
 
