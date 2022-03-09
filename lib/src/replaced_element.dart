@@ -10,8 +10,8 @@ import 'package:flutter_html_seemore/src/html_elements.dart';
 import 'package:flutter_html_seemore/src/navigation_delegate.dart';
 import 'package:flutter_html_seemore/src/utils.dart';
 import 'package:flutter_html_seemore/src/widgets/iframe_unsupported.dart'
-    if (dart.library.io) 'package:flutter_html/src/widgets/iframe_mobile.dart'
-    if (dart.library.html) 'package:flutter_html/src/widgets/iframe_web.dart';
+    if (dart.library.io) 'package:flutter_html_seemore/src/widgets/iframe_mobile.dart'
+    if (dart.library.html) 'package:flutter_html_seemore/src/widgets/iframe_web.dart';
 import 'package:flutter_html_seemore/style.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:flutter_svg/flutter_svg.dart';
