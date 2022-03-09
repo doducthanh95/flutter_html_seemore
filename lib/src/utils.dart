@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_html/style.dart';
+import 'package:flutter_html_seemore/style.dart';
 
 Map<String, String> namedColors = {
   "White": "#FFFFFF",
@@ -58,7 +58,8 @@ class MultipleTapGestureDetector extends InheritedWidget {
   }) : super(key: key, child: child);
 
   static MultipleTapGestureDetector? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<MultipleTapGestureDetector>();
+    return context
+        .dependOnInheritedWidgetOfExactType<MultipleTapGestureDetector>();
   }
 
   @override
@@ -79,7 +80,7 @@ class CustomBorderSide {
 
 String getRandString(int len) {
   var random = Random.secure();
-  var values = List<int>.generate(len, (i) =>  random.nextInt(255));
+  var values = List<int>.generate(len, (i) => random.nextInt(255));
   return base64UrlEncode(values);
 }
 
@@ -114,5 +115,6 @@ extension TextTransformUtil on String? {
 }
 
 extension ClampedEdgeInsets on EdgeInsetsGeometry {
-  EdgeInsetsGeometry get nonNegative => this.clamp(EdgeInsets.zero, const EdgeInsets.all(double.infinity));
+  EdgeInsetsGeometry get nonNegative =>
+      this.clamp(EdgeInsets.zero, const EdgeInsets.all(double.infinity));
 }

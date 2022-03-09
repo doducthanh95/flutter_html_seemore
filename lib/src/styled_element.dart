@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/src/css_parser.dart';
-import 'package:flutter_html/style.dart';
+import 'package:flutter_html_seemore/src/css_parser.dart';
+import 'package:flutter_html_seemore/style.dart';
 import 'package:html/dom.dart' as dom;
 //TODO(Sub6Resources): don't use the internal code of the html package as it may change unexpectedly.
 import 'package:html/src/query_selector.dart';
@@ -24,7 +24,8 @@ class StyledElement {
   }) : this._node = node;
 
   bool matchesSelector(String selector) =>
-      (_node != null && matches(_node as dom.Element, selector)) || name == selector;
+      (_node != null && matches(_node as dom.Element, selector)) ||
+      name == selector;
 
   Map<String, String> get attributes =>
       _node?.attributes.map((key, value) {
@@ -182,13 +183,16 @@ StyledElement parseStyledElement(
       break;
     case "font":
       styledElement.style = Style(
-        color: element.attributes['color'] != null ?
-          element.attributes['color']!.startsWith("#") ?
-            ExpressionMapping.stringToColor(element.attributes['color']!) :
-            ExpressionMapping.namedColorToColor(element.attributes['color']!) :
-          null,
+        color: element.attributes['color'] != null
+            ? element.attributes['color']!.startsWith("#")
+                ? ExpressionMapping.stringToColor(element.attributes['color']!)
+                : ExpressionMapping.namedColorToColor(
+                    element.attributes['color']!)
+            : null,
         fontFamily: element.attributes['face']?.split(",").first,
-        fontSize: element.attributes['size'] != null ? numberToFontSize(element.attributes['size']!) : null,
+        fontSize: element.attributes['size'] != null
+            ? numberToFontSize(element.attributes['size']!)
+            : null,
       );
       break;
     case "h1":

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_html/html_parser.dart';
+import 'package:flutter_html_seemore/html_parser.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/parser.dart';
 import 'package:html/dom.dart' as dom;
@@ -125,7 +125,8 @@ ImageRender networkImageRender({
         });
 
         ImageStreamListener? listener;
-        listener = ImageStreamListener((ImageInfo imageInfo, bool synchronousCall) {
+        listener =
+            ImageStreamListener((ImageInfo imageInfo, bool synchronousCall) {
           var myImage = imageInfo.image;
           Size size = Size(myImage.width.toDouble(), myImage.height.toDouble());
           if (!completer.isCompleted) {

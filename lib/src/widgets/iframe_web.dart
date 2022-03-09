@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/html_parser.dart';
-import 'package:flutter_html/shims/dart_ui.dart' as ui;
-import 'package:flutter_html/src/navigation_delegate.dart';
-import 'package:flutter_html/src/replaced_element.dart';
-import 'package:flutter_html/src/utils.dart';
-import 'package:flutter_html/style.dart';
+import 'package:flutter_html_seemore/html_parser.dart';
+import 'package:flutter_html_seemore/shims/dart_ui.dart' as ui;
+import 'package:flutter_html_seemore/src/navigation_delegate.dart';
+import 'package:flutter_html_seemore/src/replaced_element.dart';
+import 'package:flutter_html_seemore/src/utils.dart';
+import 'package:flutter_html_seemore/style.dart';
 import 'package:html/dom.dart' as dom;
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
@@ -35,7 +35,8 @@ class IframeContentElement extends ReplacedElement {
       ..src = src
       ..style.border = 'none';
     //not actually an error
-    ui.platformViewRegistry.registerViewFactory(createdViewId, (int viewId) => iframe);
+    ui.platformViewRegistry
+        .registerViewFactory(createdViewId, (int viewId) => iframe);
     return Container(
         width: width ?? (height ?? 150) * 2,
         height: height ?? (width ?? 300) / 2,
@@ -46,9 +47,7 @@ class IframeContentElement extends ReplacedElement {
               textDirection: TextDirection.ltr,
               child: HtmlElementView(
                 viewType: createdViewId,
-              )
-          ),
-        )
-    );
+              )),
+        ));
   }
 }

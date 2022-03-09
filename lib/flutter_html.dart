@@ -1,26 +1,25 @@
 library flutter_html;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_html/html_parser.dart';
-import 'package:flutter_html/image_render.dart';
-import 'package:flutter_html/src/html_elements.dart';
-import 'package:flutter_html/style.dart';
+import 'package:flutter_html_seemore/html_parser.dart';
+import 'package:flutter_html_seemore/image_render.dart';
+import 'package:flutter_html_seemore/src/html_elements.dart';
+import 'package:flutter_html_seemore/style.dart';
 import 'package:html/dom.dart' as dom;
-import 'package:flutter_html/src/navigation_delegate.dart';
+import 'package:flutter_html_seemore/src/navigation_delegate.dart';
 
 //export render context api
-export 'package:flutter_html/html_parser.dart';
-export 'package:flutter_html/image_render.dart';
+export 'package:flutter_html_seemore/html_parser.dart';
+export 'package:flutter_html_seemore/image_render.dart';
 //export src for advanced custom render uses (e.g. casting context.tree)
-export 'package:flutter_html/src/anchor.dart';
-export 'package:flutter_html/src/interactable_element.dart';
-export 'package:flutter_html/src/layout_element.dart';
-export 'package:flutter_html/src/replaced_element.dart';
-export 'package:flutter_html/src/styled_element.dart';
-export 'package:flutter_html/src/navigation_delegate.dart';
+export 'package:flutter_html_seemore/src/anchor.dart';
+export 'package:flutter_html_seemore/src/interactable_element.dart';
+export 'package:flutter_html_seemore/src/layout_element.dart';
+export 'package:flutter_html_seemore/src/replaced_element.dart';
+export 'package:flutter_html_seemore/src/styled_element.dart';
+export 'package:flutter_html_seemore/src/navigation_delegate.dart';
 //export style api
-export 'package:flutter_html/style.dart';
+export 'package:flutter_html_seemore/style.dart';
 
 class Html extends StatelessWidget {
   /// The `Html` widget takes HTML as input and displays a RichText

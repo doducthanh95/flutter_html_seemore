@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/html_parser.dart';
-import 'package:flutter_html/src/navigation_delegate.dart';
-import 'package:flutter_html/src/replaced_element.dart';
-import 'package:flutter_html/style.dart';
+import 'package:flutter_html_seemore/html_parser.dart';
+import 'package:flutter_html_seemore/src/navigation_delegate.dart';
+import 'package:flutter_html_seemore/src/replaced_element.dart';
+import 'package:flutter_html_seemore/style.dart';
 import 'package:webview_flutter/webview_flutter.dart' as webview;
 import 'package:html/dom.dart' as dom;
 
@@ -38,21 +38,22 @@ class IframeContentElement extends ReplacedElement {
           initialUrl: src,
           key: key,
           javascriptMode: sandboxMode == null || sandboxMode == "allow-scripts"
-            ? webview.JavascriptMode.unrestricted
-            : webview.JavascriptMode.disabled,
-        navigationDelegate: (request) async {
-          final result = await navigationDelegate!(NavigationRequest(
-            url: request.url,
-            isForMainFrame: request.isForMainFrame,
-          ));
-          if (result == NavigationDecision.prevent) {
-            return webview.NavigationDecision.prevent;
-          } else {
-            return webview.NavigationDecision.navigate;
-          }
-        },
+              ? webview.JavascriptMode.unrestricted
+              : webview.JavascriptMode.disabled,
+          navigationDelegate: (request) async {
+            final result = await navigationDelegate!(NavigationRequest(
+              url: request.url,
+              isForMainFrame: request.isForMainFrame,
+            ));
+            if (result == NavigationDecision.prevent) {
+              return webview.NavigationDecision.prevent;
+            } else {
+              return webview.NavigationDecision.navigate;
+            }
+          },
           gestureRecognizers: {
-            Factory<VerticalDragGestureRecognizer>(() => VerticalDragGestureRecognizer())
+            Factory<VerticalDragGestureRecognizer>(
+                () => VerticalDragGestureRecognizer())
           },
         ),
       ),

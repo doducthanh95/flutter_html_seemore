@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_html_seemore/flutter_html.dart';
 
 void main() => runApp(new MyApp());
 
