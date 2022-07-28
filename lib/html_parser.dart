@@ -101,20 +101,20 @@ class HtmlParser extends StatelessWidget {
       //add tag seeless
       htmlString = htmlString.replaceAll(
           '</body></html>', '<seeless></seeless></body></html>');
+      subStringEnd += '<seeless></seeless></body></html>';
     }
 
     if (!isShowFull) {
       //handle format html
       if (countNumber > numberShortCharacterDisplay) {
         //insert tag SeeMore
-        var temps = htmlString.split(subStringEnd);
-        // var stringHtml = '';
-        if (subStringStart.isEmpty) {
-          htmlString =
-              temps.first + subStringEnd + "<seemore></seemore></body></html>";
-        } else {
-          htmlString =
-              temps.first + "<seemore></seemore></$tagEnd></body></html>";
+        subStringStart = subStringStart.replaceAll('"', '');
+
+        final _startIndex =
+            htmlString.indexOf(subStringStart) + subStringStart.length;
+        if (_startIndex != htmlString.length) {
+          htmlString = htmlString.substring(0, _startIndex) +
+              '<seemore></seemore></$tagEnd></body></html>';
         }
       }
     }
@@ -1125,7 +1125,7 @@ class HtmlParser extends StatelessWidget {
 
     if (cleanedTree?.children.length == 0) {
       var tag = cleanedTree?.element?.localName ?? '';
-      var content = cleanedTree?.element?.innerHtml ?? '';
+      var content = cleanedTree.toString();
 
       // check content co thoa man dk de them tag break
       if ((countNumber + content.length) > numberShortCharacterDisplay) {
@@ -1180,6 +1180,9 @@ class HtmlParser extends StatelessWidget {
         _applyCustomStyles(style, inlineStyledTree);
     StyledElement cascadedStyledTree = _cascadeStyles(style, customStyledTree);
     StyledElement cleanedTree = cleanTree(cascadedStyledTree);
+
+    //ddthanh
+    // cleanedTree.element?.text += 'ddthanh test';
     return cleanedTree;
   }
 }

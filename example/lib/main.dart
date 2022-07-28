@@ -26,7 +26,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => new _MyHomePageState();
 }
 
-const htmlData = r"""
+var htmlData = r"""
 <p id='top'><a href='#bottom'>Scroll to bottom ddthanh</a></p>
       <h1>Header 1</h1>
       <h2>Header 2</h2>
@@ -251,6 +251,24 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+
+    htmlData = r"""
+    <p><strong>Tại buổi lễ, Bộ trưởng Bộ Nội vụ Phạm Thị Thanh Trà </strong><strong><em>công bố 
+    quyết định số 568 của Bộ Chính trị ngày 14/7/2022 chỉ định bà Đào 
+    Hồng Lan</em></strong><em> </em>- Uỷ viên Trung ương Đảng giữ chức 
+    Bí thư Ban Cán sự Đảng Bộ Y tế. Quyết định số 839/QĐ-TTg ngày 15/7 của
+     Thủ tướng Chính phủ về việc giao Quyền Bộ trưởng Bộ Y tế đối với bà 
+     Đào Hồng Lan. Quyết định có hiệu lực kể từ ngày ký ban hành.<br>Thủ tướng 
+     Chính phủ Phạm Minh Chính đã trao quyết định quyền Bộ trưởng Bộ Y tế cho bà Đào Hồng Lan.</p>\n
+    """;
+
+    //test 1
+    htmlData =
+        r'''<strong>Tại buổi lễ, Bộ trưởng Bộ Nội vụ Phạm Thị Thanh Trà </strong><strong><em>công bố
+    quyết định số 568 của Bộ Chính trị ngày 14/7/2022 chỉ định bà Đào
+    Hồng Lan</em></strong><em> </em>''';
+
+    //test 2
   }
 
   @override
